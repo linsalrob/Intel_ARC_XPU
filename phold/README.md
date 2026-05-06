@@ -3,6 +3,21 @@
 Using the xpu for phold...does it help?
 
 
+# install the WSL xpu dependencies
+
+I was having a hard time with launchpad, and this made it go a lot quicker (well, work, actually):
+
+```
+sudo apt-get update -o Acquire::ForceIPv4=true
+sudo apt-get install xpu-smi -o Acquire::ForceIPv4=true
+sudo apt install -y libze1 libze-intel-gpu1 intel-metrics-discovery intel-gsc clinfo
+```
+
+Then check you can see the xpu:
+
+```
+
+
 # Create the phold environment
 
 Create a new environment and install pytorch. These instructions are from the [pytorch page](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html)
@@ -33,8 +48,15 @@ This should tell you what your XPU devices are. On my laptop, I get the followin
 I don't like doing it this way, because a future `phold` version may break this. However, we can't install over the top of pytorch!
 
 ```
-mamba install -c conda-forge -c bioconda foldseek=10.941cd33 biopython alive-progress datasets requests pyarrow pandas loguru pyyaml click sentencepiece transformers pyrodigal-gv numpy pycirclize h5py pip
+mamba install -c conda-forge -c bioconda foldseek=10.941cd33 biopython alive-progress datasets requests pyarrow pandas loguru pyyaml click sentencepiece transformers pyrodigal-gv numpy pycirclize h5py pip protobuf tqdm dataclasses
 ```
+
+Here are the pip dependencies I needed to install:
+
+```
+pip install tiktoken click
+```
+
 
 
 ## .
