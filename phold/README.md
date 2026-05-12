@@ -1,6 +1,29 @@
 # Install Phold for XPU computing
 
-Using the xpu for phold...does it help?
+Using the xpu for phold... it speeds things up!
+
+
+# Simple installation
+
+For the installation, we create the environment and install everything except pytorch. Then we install the XPU versions of pytorch.
+
+Finally, we install `phold` with no dependencies.
+
+```
+mamba create -n phold_xpu python=3.12 pip -y
+mamba activate phold_xpu
+
+mamba install -y -c conda-forge -c bioconda \
+  foldseek=10.941cd33 \
+  biopython alive-progress datasets requests pyarrow pandas loguru pyyaml \
+  click sentencepiece transformers pyrodigal-gv numpy pycirclize h5py \
+  protobuf tqdm
+
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/xpu
+
+pip install --no-deps phold
+```
+
 
 
 # install the WSL xpu dependencies
